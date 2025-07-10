@@ -103,6 +103,6 @@ Your Name : Prajkta Prabhakar More
 
 Email: prajktamore63@gmail.com
 
-GitHub: https://github.com/shruti-thorat0715/JavaFullStack/edit/main/README.md
+GitHub: https://github.com/prajkta-more/JavaFullStack.git
 
 Enjoy using the Online Bookshop ! 🚀

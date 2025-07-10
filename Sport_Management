@@ -1,0 +1,187 @@
+package com.sport;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class Player {
+    String name;
+    int age;
+
+    public Player(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String toString() {
+        return name + " (Age: " + age + ")";
+    }
+}
+
+class Team {
+    String teamName;
+    List<Player> players = new ArrayList();
+
+    public Team(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public void addPlayer(Player p) {
+        players.add(p);
+    }
+
+    public String toString() {
+        return teamName + " - Players: " + players;
+    }
+}
+
+class Match {
+    Team team1;
+    Team team2;
+    String date;
+
+    public Match(Team t1, Team t2, String date) {
+        this.team1 = t1;
+        this.team2 = t2;
+        this.date = date;
+    }
+
+    public String toString() {
+        return team1.teamName + " vs " + team2.teamName + " on " + date;
+    }
+}
+
+public class SportsManagementSystem {
+    static Scanner sc = new Scanner(System.in);
+    static List<Team> teams = new ArrayList();
+    static List<Match> matches = new ArrayList();
+
+    public static void main(String[] args) {
+        int choice;
+        do {
+            System.out.println("\n❤️❤️❤️❤️Sport Management System❤️❤️❤️❤️");
+            System.out.println("1. Add Team");
+            System.out.println("2. Add Player to Team");
+            System.out.println("3. View Teams and Players");
+            System.out.println("4. Schedule Match");
+            System.out.println("5. View Matches");
+            System.out.println("6. Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+            sc.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                	addTeam();
+                	break;
+                case 2:
+                	addPlayerToTeam();
+                	break;
+                case 3:
+                    viewTeams();
+                    break;
+                case 4:
+                	scheduleMatch();
+                	break;
+                case 5 :
+                	viewMatches();
+                	break;
+                case 6:
+                	System.out.println("Exiting...");
+                	break;
+                default:
+                	System.out.println("Invalid choice.");
+            }
+        } while (choice != 0);
+    }
+
+    public static void addTeam() {
+        System.out.print("Enter team name: ");
+        String name = sc.nextLine();
+        teams.add(new Team(name));
+        System.out.println("Team added!");
+    }
+
+    public static void addPlayerToTeam() {
+        if (teams.isEmpty()) {
+            System.out.println("No teams available. Add a team first.");
+            return;
+        }
+
+        System.out.println("Select team:");
+        for (int i = 0; i < teams.size(); i++) {
+            System.out.println((i + 1) + ". " + teams.get(i).teamName);
+        }
+
+        int teamIndex = sc.nextInt() - 1;
+        sc.nextLine();
+
+        if (teamIndex < 0 || teamIndex >= teams.size()) {
+            System.out.println("Invalid team selected.");
+            return;
+        }
+
+        System.out.print("Enter player name: ");
+        String name = sc.nextLine();
+        System.out.print("Enter player age: ");
+        int age = sc.nextInt();
+
+        Player p = new Player(name, age);
+        teams.get(teamIndex).addPlayer(p);
+        System.out.println("Player added to " + teams.get(teamIndex).teamName);
+    }
+
+    public static void viewTeams() {
+        if (teams.isEmpty()) {
+            System.out.println("No teams available.");
+            return;
+        }
+        for (Team t : teams) {
+            System.out.println(t);
+        }
+    }
+
+    public static void scheduleMatch() {
+        if (teams.size() < 2) {
+            System.out.println("At least 2 teams needed to schedule a match.");
+            return;
+        }
+
+        System.out.println("Select first team:");
+        for (int i = 0; i < teams.size(); i++) {
+            System.out.println((i + 1) + ". " + teams.get(i).teamName);
+        }
+        int idx1 = sc.nextInt() - 1;
+        sc.nextLine();
+
+        System.out.println("Select second team:");
+        for (int i = 0; i < teams.size(); i++) {
+            if (i != idx1)
+                System.out.println((i + 1) + ". " + teams.get(i).teamName);
+        }
+        int idx2 = sc.nextInt() - 1;
+        sc.nextLine();
+
+        if (idx1 == idx2 || idx1 < 0 || idx2 < 0 || idx1 >= teams.size() || idx2 >= teams.size()) {
+            System.out.println("Invalid teams selected.");
+            return;
+        }
+
+        System.out.print("Enter match date (e.g., 2025-07-15): ");
+        String date = sc.nextLine();
+
+        matches.add(new Match(teams.get(idx1), teams.get(idx2), date));
+        System.out.println("Match scheduled!");
+    }
+
+    public static void viewMatches() {
+        if (matches.isEmpty()) {
+            System.out.println("No matches scheduled.");
+            return;
+        }
+
+        for (Match m : matches) {
+            System.out.println(m);
+        }
+    }
+}

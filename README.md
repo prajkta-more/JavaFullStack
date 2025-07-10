@@ -28,6 +28,22 @@ Dependancies:
     <scope>test</scope>
 </dependency>
 
+*Project Directory Structure
+
+SportsManagementSystem/
+│
+├── src/
+│   ├── Player.java
+│   ├── Team.java
+│   ├── Match.java
+│   ├── Database.java
+│   └── SportsManagementSystem.java
+│
+├── lib/                   
+├── sql/                   
+└── README.md
+
+
 Prerequisites:
 before running the project, ensure you have the following installed:
 

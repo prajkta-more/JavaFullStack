@@ -1,33 +1,35 @@
-Online Bookshop - Core Java JDBC Project
+✨Sports Management System✨
 
-This is a console-based menu-driven Online Bookshop application written in Core Java using JDBC and PostgreSQL.
+
+
+
+This is a console-based sports management system that allows you to manage teams, players, and matches, and written in Core Java using JDBC and PostgreSQL.
 
 💻 Technologies Used:
 
 Java (JDK 8+)
+Maven
+Java (JDK 8+)
 PostgreSQL
 JDBC
-📦 Features:
 
-Add authors and categories
-Add books with category and author
-Register users
-View available books
-Place orders with multiple items
-Uses PostgreSQL relationships and constraints
+❤️❤️ Features
+•	Add teams and players.
+•	View teams and their players.
+•	Schedule and view matches.
+
+
 Dependancies:
 
 <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-api</artifactId>
+    <version>5.7.1</version>
+    <scope>test</scope>
+</dependency>
 
-<groupId>org.postgresql</groupId>
-
-<artifactId>postgresql</artifactId>
-
-<version>42.7.7</version>
-_______________________________________________________________________________________________________________________
 Prerequisites:
-
-Before running the project, ensure you have the following installed:
+before running the project, ensure you have the following installed:
 
 1]Java Development Kit (JDK) 17 or higher.
 
@@ -36,63 +38,25 @@ Before running the project, ensure you have the following installed:
 3]create PostgreSQL database with the following table:
 
 -- Run in pgAdmin or psql
-
-CREATE TABLE Authors (
-
-author_id SERIAL PRIMARY KEY,
-
-name VARCHAR(100) NOT NULL
+CREATE TABLE teams (
+    team_id SERIAL PRIMARY KEY,
+    team_name VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE Categories (
-
-category_id SERIAL PRIMARY KEY,
-
-name VARCHAR(100) NOT NULL
+-- Create the 'players' table
+CREATE TABLE players (
+    player_id SERIAL PRIMARY KEY,
+    player_name VARCHAR(100) NOT NULL,
+    player_age INT,
+    team_id INT REFERENCES teams(team_id)
 );
 
-CREATE TABLE Users (
-
-user_id SERIAL PRIMARY KEY,
-
-name VARCHAR(100),
-
-email VARCHAR(100),
-
-password VARCHAR(50)
-);
-
-CREATE TABLE Books (
-
-book_id SERIAL PRIMARY KEY,
-
-title VARCHAR(150),
-
-price DECIMAL(10,2),
-
-author_id INT REFERENCES Authors(author_id),
-
-category_id INT REFERENCES Categories(category_id)
-);
-
-CREATE TABLE Orders (
-
-order_id SERIAL PRIMARY KEY,
-
-user_id INT REFERENCES Users(user_id),
-
-order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE Order_Items (
-
-item_id SERIAL PRIMARY KEY,
-
-order_id INT REFERENCES Orders(order_id),
-
-book_id INT REFERENCES Books(book_id),
-
-quantity INT
+-- Create the 'matches' table
+CREATE TABLE matches (
+    match_id SERIAL PRIMARY KEY,
+    team1_id INT REFERENCES teams(team_id),
+    team2_id INT REFERENCES teams(team_id),
+    match_date DATE
 );
 
 Contact:
@@ -105,4 +69,4 @@ Email: prajktamore63@gmail.com
 
 GitHub: https://github.com/prajkta-more/JavaFullStack.git
 
-Enjoy using the Online Bookshop ! 🚀
+Enjoy using the Online Sports Management System ! 🚀

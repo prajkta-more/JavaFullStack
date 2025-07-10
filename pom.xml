@@ -1,0 +1,34 @@
+<dependencyManagement>
+  <dependencies>
+     <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-platform</artifactId>
+            <version>7.0.5.Final</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-bom -->
+<dependency>
+    <groupId>jakarta.platform</groupId>
+    <artifactId>jakarta.jakartaee-bom</artifactId>
+    <version>11.0.0</version>
+    <type>pom</type>
+</dependency>
+ 
+  </dependencies>
+  </dependencyManagement>
+  
+  <dependencies>
+      <dependency>
+        <groupId>org.hibernate.orm</groupId>
+        <artifactId>hibernate-core</artifactId>
+    </dependency>
+    
+    <dependency>
+        <groupId>jakarta.transaction</groupId>
+        <artifactId>jakarta.transaction-api</artifactId>
+    </dependency>
+     
+  </dependencies>
+</project>
